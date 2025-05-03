@@ -62,7 +62,8 @@ app.post("/v1/mcp/threads/:thread_id/messages", async (req, res) => {
   
   const { reply, step } = await seed_data.action(message.seed, threads[threadId].messages);
   threads[threadId].messages.push(reply);
-  threads[threadId].messages.steps.push(step);
+  if(step)
+    threads[threadId].steps.push(step);
 
   return res.status(200).json(reply);
 });
