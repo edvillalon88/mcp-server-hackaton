@@ -1,3 +1,4 @@
+const OpenAI = require("openai");
 module.exports = {
     'generate_react_component':{
         action:async (seed, messages)=>{
@@ -12,10 +13,10 @@ module.exports = {
         - Exporta el componente por default.
         - Usa estilo limpio y profesional.
         `;
-
+            const openai = new OpenAI({ apiKey: "API_TOKEN" });
             const conversation = [
-            { role: "system", content: systemPrompt },
-            ...messages,
+                { role: "system", content: systemPrompt },
+                ...messages,
             ];
 
             const openaiResponse = await openai.chat.completions.create({
